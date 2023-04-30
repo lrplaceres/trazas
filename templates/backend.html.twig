@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	{% block header %}
+		{% include "_navbar.html.twig" %}
+	{% endblock %}
+
+	<div class="container">
+		{% block article %}{% endblock %}
+	</div>
+
+	{% block footer %}
+		{% include "_offcanvas.html.twig" %}
+	{% endblock %}
+
+
+{% endblock %}

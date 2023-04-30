@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estadísticas Globales
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center widget">Estadísticas Globales</h1>
+
+		<table class="table table-striped table-hover table-bordered widget">
+			<thead class="table-primary">
+				<tr>
+					<th colspan="4" class="text-center">Total</th>
+					<th colspan="3" class="text-center">Denegadas</th>
+					<th colspan="2" class="text-center">Perdidas</th>
+				</tr>
+				<tr>
+					<th>Año</th>
+					<th>Peticiones</th>
+					<th>Horas</th>
+					<th>GB</th>
+					<th>Peticiones</th>
+					<th>MB</th>
+					<th>Segundos</th>
+					<th>Peticiones</th>
+					<th>MB</th>
+				</tr>
+			</thead>
+			{% for y in years %}
+				<tr>
+					<td>
+						<a href="{{ path('app_traza_index', {'anho': y['anho']}) }}">
+							{{ y['anho'] }}
+						</a>
+					</td>
+					<td>{{ y['cant'] }}</td>
+					<td>{{ (y['milis']/ 3600000)|number_format(2) }}</td>
+					<td>{{ (y['bytes'] / 1000000000)|number_format(2)}}</td>
+					{% for d in denegados %}
+
+						{% if y['anho'] == d['anho']%}
+							<td>{{d['cant']}}</td>
+							<td>{{(d['bytes'] / 1000000)|number_format(2) }}</td>
+							<td>{{(d['milis']/1000)|number_format(2)}}</td>
+						{% endif %}
+
+					{% endfor %}
+
+					{% for p in perdidas %}
+
+						{% if y['anho'] == p['anho']%}
+							<td>{{p['cant']}}</td>
+							<td>{{(p['bytes'] / 1000000)|number_format(2) }}</td>
+						{% endif %}
+
+					{% endfor %}
+				</tr>
+			{% endfor %}
+
+		</table>
+
+	</div>
+{% endblock %}

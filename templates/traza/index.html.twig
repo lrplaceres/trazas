@@ -1,0 +1,78 @@
+{% extends 'backend.html.twig' %}
+
+{% block title %}Trazas {{ anho }}
+{% endblock %}
+
+{% block article %}
+
+	<a href="{{ path('app_traza_import') }}">Importar</a>
+	<h1 class="text-center widget">Trazas
+		{{anho}}</h1>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-bordered widget">
+			<thead class="table-primary">
+				<tr>
+					<th style="background-color:white"></th>
+					<th colspan="3" class="text-center">Total</th>
+					<th colspan="3" class="text-center">Denegadas</th>
+					<th colspan="2" class="text-center">Perdidas</th>
+					<th style="background-color:white"></th>
+				</tr>
+				<tr>
+					<th>Mes</th>
+					<th>Peticiones</th>
+					<th>Horas</th>
+					<th>GB</th>
+					<th>Peticiones</th>
+					<th>MB</th>
+					<th>Segundos</th>
+					<th>Peticiones</th>
+					<th>MB</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			{% for y in trazas %}
+				<tr>
+					<td>
+						<a href="{{ path('app_traza_mes', {'anho': anho,'mes': y['mes']}) }}">
+							{{ y['mesname'] }}
+						</a>
+					</td>
+					<td>{{ y['cant'] }}</td>
+					<td>{{ (y['milis']/ 3600000)|number_format(2) }}</td>
+					<td>{{ (y['bytes'] / 1000000000)|number_format(2) }}</td>
+
+					{% for d in denegados %}
+
+						{% if y['mes'] == d['mes']%}
+							<td>{{d['cant']}}</td>
+							<td>{{(d['bytes'] / 1000000)|number_format(2) }}</td>
+							<td>{{(d['milis']/1000)|number_format(2)}}</td>
+						{% endif %}
+
+					{% endfor %}
+
+					{% for p in perdidas %}
+
+						{% if y['mes'] == p['mes']%}
+							<td>{{p['cant']}}</td>
+							<td>{{(p['bytes'] / 1000000)|number_format(2) }}</td>
+						{% endif %}
+
+					{% endfor %}
+					<td>
+						<a href="{{ path('app_traza_mes_dias', {'anho': anho,'mes': y['mes']}) }}" title="DÍAS"><i class="bi bi-calendar3"></i></a>
+						<i class="bi bi-bar-chart-fill"></i>
+						<a href="{{ path('app_traza_mes', {'anho': anho,'mes': y['mes']}) }}" title="Usuarios"><i class="bi bi-people-fill"></i></a>
+						<a href="{{ path('app_traza_mes_codigo', {'anho': anho,'mes': y['mes'], 'codigo':'DENIED'}) }}" title="Denegados"><i class="bi bi-shield-fill-x"></i></a>
+						<a href="{{ path('app_traza_mes_uri', {'anho': anho,'mes': y['mes']}) }}" title="URL"><i class="bi bi-globe2"></i></a>
+						<a href="{{ path('app_traza_mes_ip', {'anho': anho,'mes': y['mes']}) }}" title="IPv4"><i class="bi bi-pc-display"></i></a>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</table>
+	</div>
+
+{% endblock %}

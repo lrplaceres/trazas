@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traza{% endblock %}
+
+{% block body %}
+    <h1>Traza</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ traza.id }}</td>
+            </tr>
+            <tr>
+                <th>Timestamp</th>
+                <td>{{ traza.timestamp }}</td>
+            </tr>
+            <tr>
+                <th>Timeproxy</th>
+                <td>{{ traza.timeproxy }}</td>
+            </tr>
+            <tr>
+                <th>Ip</th>
+                <td>{{ traza.ip }}</td>
+            </tr>
+            <tr>
+                <th>ResultCacheCode</th>
+                <td>{{ traza.resultCacheCode }}</td>
+            </tr>
+            <tr>
+                <th>LenghtContent</th>
+                <td>{{ traza.lenghtContent }}</td>
+            </tr>
+            <tr>
+                <th>Method</th>
+                <td>{{ traza.method }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ traza.url }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ traza.username }}</td>
+            </tr>
+            <tr>
+                <th>ProxyHierarcheRoute</th>
+                <td>{{ traza.proxyHierarcheRoute }}</td>
+            </tr>
+            <tr>
+                <th>ContentType</th>
+                <td>{{ traza.contentType }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_traza_index') }}">back to list</a>
+
+{% endblock %}

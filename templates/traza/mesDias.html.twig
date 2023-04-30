@@ -1,0 +1,65 @@
+{% extends 'backend.html.twig' %}
+
+{% block title %}Trazas
+	{{ mes }}
+{% endblock %}
+
+{% block article %}
+
+<h1 class="text-center widget">Traza Mes:
+		{{ mes }}
+		Año:
+		{{anho}}</h1>
+
+	<div class="row mb-10 mt-10">
+		{% for t in trazas %}
+
+			<div class="col-3">
+
+				<div class="card">
+					<div class="card-body">
+						<div class="card-header text-center">{{ t.dia }}</div>
+						<div class="card-body">
+							<h6>Peticiones
+								<span class="badge bg-primary">{{t.cant}}</span>
+							</h6>
+							<h6>Horas
+								<span class="badge bg-primary">{{(t.milis/ 3600000)|number_format(2)}}</span>
+							</h6>
+							<h6>MB
+								<span class="badge bg-primary">{{(t.bytes/ 1000000)|number_format(2)}}</span>
+							</h6>
+						</div>
+						<a href="#" class="card-link">
+							<i class="bi bi-info-circle"></i>
+						</a>
+						<a href="#" class="card-link">
+							<i class="bi bi-calendar3"></i>
+						</a>
+						<a href="#" class="card-link">
+							<i class="bi bi-bar-chart-fill"></i>
+						</a>
+						<a href="#" class="card-link">
+							<i class="bi bi-shield-fill-x"></i>
+						</a>
+						<a href="#" class="card-link">
+							<i class="bi bi-globe2"></i>
+						</a>
+						<a href="#" class="card-link">
+							<i class="bi bi-pc-display"></i>
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+			{% if loop.index % 4 == 0 %}
+			</div>
+			<div class="row mb-10">
+			{% endif %}
+
+
+		{% endfor %}
+	</div>
+
+{% endblock %}

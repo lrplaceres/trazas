@@ -1,0 +1,41 @@
+{% extends 'backend.html.twig' %}
+
+{% block title %}Traza index
+{% endblock %}
+
+{% block article %}
+
+	<table class="table table-striped table-hover widget">
+		<thead class="table-primary">
+			<th></th>
+			<th>Tiempo ms</th>
+			<th>IPv4</th>
+			<th>MB</th>
+			<th>URL</th>
+			<th>Fecha</th>
+		</thead>
+		<tbody>
+
+			{% for y in trazas %}
+				<tr>
+					{% set result = y.resultCacheCode|split("/") %}
+					{% if result[0] =="TCP_DENIED" %}
+						<td>
+							<span class="badge text-bg-danger">Denegado</span>
+						</td>
+					{% else %}
+						<td></td>
+					{% endif %}
+					<td>{{y.timeproxy}}</td>
+					<td>{{y.ip}}</td>
+
+					<td>{{(y.lenghtContent / 1000000)|number_format(2) }}</td>
+					<td>{{y.url}}</td>
+					<td>{{y.fecha|date ('Y-m-d H:m')}}</td>
+
+				</tr>
+			{% endfor %}
+		</tbody>
+		<table>
+
+		{% endblock %}

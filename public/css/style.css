@@ -1,0 +1,21 @@
+body {
+    background: url(../images/linen_bg.jpg)
+}
+
+.widget{
+    background-color: white;
+    border-radius: 5px;   
+    padding: 5px 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mb-10{
+    margin-bottom: 10px;
+}
+
+.mt-10{
+    margin-top: 10px;
+}

@@ -1,0 +1,44 @@
+{% extends 'backend.html.twig' %}
+
+{% block title %}Traza index
+{% endblock %}
+
+{% block article %}
+
+	<a href="{{ path('app_traza_import') }}">Importar</a>
+	<h1 class="text-center widget">Traza Mes:
+		{{ mes }}
+		Año:
+		{{anho}}</h1>
+
+
+	<table class="table table-striped table-hover table-bordered widget">
+		<thead class="table-primary">
+
+			<tr>
+				<th scope="col">Usuario</th>
+				<th scope="col">Peticiones</th>
+				<th scope="col">MB</th>
+				<th scope="col">Horas</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for d in denegados %}
+				<tr>
+					<td>{{d['usuario']}}</td>
+					<td>{{d['cant']}}</td>
+					<td>{{(d['bytes'] / 1000000)|number_format(2) }}</td>
+					<td>{{(d['milis']/1000)|number_format(2)}}</td>
+					<td><i class="bi bi-info-circle"></i></td>
+				</tr>
+			{% endfor %}
+
+
+		</tbody>
+
+	</table>
+
+
+{% endblock %}
